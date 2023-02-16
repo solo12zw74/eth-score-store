@@ -58,6 +58,18 @@ module.exports = {
    */
 
   networks: {
+    production: {
+      provider: () => {
+        const connectionURL = 'nodeConnectionURL'; // JSON/RPC connection URL without protocol (no "https://")
+        return new HTTPProviderRateLimitRetry({connectionURL}, 100000);
+      },
+      network_id: "*", // Match any network id
+      gasPrice: 0,
+      gas: 4500000,
+      disableConfirmationListener: true, // generates thousands of eth_getBlockByNumber calls
+      timeoutBlocks: 3,
+      deploymentPollingInterval: 5000,
+    }
     // Useful for testing. The `development` name is special - truffle uses it by default
     // if it's defined here and no other network is specified at the command line.
     // You should run a client (like ganache, geth, or parity) in a separate terminal
