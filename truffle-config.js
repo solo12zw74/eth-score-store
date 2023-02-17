@@ -45,6 +45,8 @@
 // const { MNEMONIC, PROJECT_ID } = process.env;
 
 // const HDWalletProvider = require('@truffle/hdwallet-provider');
+const HTTPProviderRateLimitRetry = require('./lib/http-provider-rate-limit-retry')
+const config = require('./config.json')
 
 module.exports = {
   /**
@@ -60,8 +62,8 @@ module.exports = {
   networks: {
     production: {
       provider: () => {
-        const connectionURL = 'nodeConnectionURL'; // JSON/RPC connection URL without protocol (no "https://")
-        return new HTTPProviderRateLimitRetry({connectionURL}, 100000);
+        const connectionURL = config.kaleidoUrl; // JSON/RPC connection URL without protocol (no "https://")
+        return new HTTPProviderRateLimitRetry(connectionURL, 100000);
       },
       network_id: "*", // Match any network id
       gasPrice: 0,
