@@ -11,7 +11,9 @@
     "truffle": "^5.5.15",
     "web3": "^1.7.3"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "xhr2-cookies": "^1.1.0"
+  },
   "scripts": {
     "test": "truffle test"
   },
